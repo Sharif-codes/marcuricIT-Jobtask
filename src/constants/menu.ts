@@ -56,12 +56,6 @@ const MENU_ITEMS: MenuItemTypes[] = [
       url: "/components/accounting-expenses",
       parentKey: "components-accounting",
     },
-    // {
-    //   key: "accounting-create-expenses",
-    //   label: "Create Expenses",
-    //   url: "/components/accounting-create-expenses",
-    //   parentKey: "components-accounting",
-    // },
     {
       key: "accounting-report",
       label: "Accounting Report",
@@ -71,9 +65,10 @@ const MENU_ITEMS: MenuItemTypes[] = [
     {
       key: "accounting-doctor-report",
       label: "Doctor Report",
-      url: "/apps/email/compose",
+      url: "/components/accounting-doctor-report",
       parentKey: "components-accounting",
     },
+    
   ],
 },
 //Accounting section end here

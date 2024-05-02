@@ -1,14 +1,16 @@
-import { Row, Col, Card } from "react-bootstrap";
+import { Row, Col, Card, Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import ShreyuDatepicker from "../../../components/Datepicker";
 import { Typeahead } from "react-bootstrap-typeahead";
 import "react-bootstrap-typeahead/css/Typeahead.css";
 import { useState } from "react";
 import CustomDatePicker from "./DatePicker";
+import PageTitle from "../../PageTitle";
 
 
 const AccountingReport = () => {
     const [singleSelections, setSingleSelections] = useState([]);
+    const [selectedDateRange, setSelectedDateRange] = useState("");
 
     const options: Array<OptionTypes> = [
         { id: 1, value: "sample", label: "Sample" },
@@ -19,78 +21,163 @@ const AccountingReport = () => {
     const onChangeSingleSelection = (selected: OptionTypes[]) => {
         setSingleSelections(selected);
     };
+    const DaysOptions = [
+        { id: 1, label: "Today" },
+        { id: 2, label: "Yesterday" },
+        { id: 3, label: "Last 7 days" },
+        { id: 4, label: "Last 30 days" },
+        { id: 5, label: "This month" },
+        { id: 6, label: "Last month" },
+        { id: 7, label: "This year" },
+        { id: 8, label: "Last year" },
+    ];
 
-    const [selectedDate, setSelectedDate] = useState(new Date());
-    const onDateChange = (date) => {
-        if (date) {
-            setSelectedDate(date);
+    const handleOptionClick = (label) => {
+        let minDate, maxDate;
+        const currentDate = new Date();
+        switch (label) {
+            case "Today":
+                minDate = currentDate;
+                maxDate = currentDate;
+                break;
+            case "Yesterday":
+                minDate = new Date(currentDate.getTime() - 24 * 60 * 60 * 1000);
+                maxDate = minDate;
+                break;
+            case "Last 7 days":
+                minDate = new Date(currentDate.getTime() - 7 * 24 * 60 * 60 * 1000);
+                maxDate = currentDate;
+                break;
+            case "Last 30 days":
+                minDate = new Date(currentDate.getTime() - 30 * 24 * 60 * 60 * 1000);
+                maxDate = currentDate;
+                break;
+            case "This month":
+                minDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+                maxDate = currentDate;
+                break;
+            case "Last month":
+                minDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1);
+                maxDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0);
+                break;
+            case "This year":
+                minDate = new Date(currentDate.getFullYear(), 0, 1);
+                maxDate = currentDate;
+                break;
+            case "Last year":
+                minDate = new Date(currentDate.getFullYear() - 1, 0, 1);
+                maxDate = new Date(currentDate.getFullYear() - 1, 11, 31);
+                break;
+            default:
+                break;
         }
+        setSelectedDateRange(`${minDate.toLocaleDateString()} - ${maxDate.toLocaleDateString()}`);
     };
 
+
     return (
-        <Card class="container">
-            <div>
-                <h3> <i class="bi bi-calculator-fill"></i>Accounting</h3>
-            </div>
-            <div class="row">
+        <>
+            <PageTitle
+                breadCrumbItems={[
 
+                    { label: "Accounting", path: "/components/accounting-report", active: true },
 
-                <div className="col">
+                ]}
+                title={"Accounting"}
+            />
+            <Card class="">
 
-                    <CustomDatePicker></CustomDatePicker>
-                </div>
-                <div class="col">
-                    <Card.Body >
-                        <p className="mb-1 fw-bold">Doctor:</p>
-                        <Typeahead
-                            id="select2"
-                            labelKey={"label"}
-                            multiple={false}
-                            onChange={onChangeSingleSelection}
-                            options={options}
-                            placeholder="Choose a state..."
-                            selected={singleSelections}
-                        />
-                    </Card.Body>
-                </div>
-                <div class="col">
-                <Card.Body >
-                        <p className="mb-1 fw-bold">Test:</p>
-                        <Typeahead
-                            id="select2"
-                            labelKey={"label"}
-                            multiple={false}
-                            onChange={onChangeSingleSelection}
-                            options={options}
-                            placeholder="Choose a state..."
-                            selected={singleSelections}
-                        />
-                    </Card.Body>
+                <h4 class="px-2">Accounting Report</h4>
 
-                </div>
-                <div class="col">
-                <Card.Body >
-                        <p className="mb-1 fw-bold">Culture:</p>
-                        <Typeahead
-                            id="select2"
-                            labelKey={"label"}
-                            multiple={false}
-                            onChange={onChangeSingleSelection}
-                            options={options}
-                            placeholder="Choose a state..."
-                            selected={singleSelections}
-                        />
-                    </Card.Body>
-                </div>
-                <div class="col">
+                <Card.Body>
+                    <Row>
+                        <Col>
+                            <p className="mb-1 fw-bold">Date range:
+                            </p>
+                            <Typeahead
+                                id="select2"
+                                labelKey={"label"}
+                                multiple={false}
+                                options={DaysOptions}
+                                placeholder="Choose a date range..."
+                                selected={[{ label: selectedDateRange }]} // Display selected date range in the input field
+                                onChange={(selected) => {
+                                    if (selected.length > 0) {
+                                        handleOptionClick(selected[0].label);
+                                    }
+                                }}
+                            />
+                        </Col>
+                        <Col>
 
-                </div>
+                            <p className="mb-1 fw-bold">Doctor:</p>
+                            <Typeahead
+                                id="select2"
+                                labelKey={"label"}
+                                multiple={false}
+                                onChange={onChangeSingleSelection}
+                                options={options}
+                                placeholder="Choose a state..."
+                                selected={singleSelections}
+                            />
 
+                        </Col>
+                        <Col>
 
-            </div>
+                            <p className="mb-1 fw-bold">Test:</p>
+                            <Typeahead
+                                id="select2"
+                                labelKey={"label"}
+                                multiple={false}
+                                onChange={onChangeSingleSelection}
+                                options={options}
+                                placeholder="Choose a state..."
+                                selected={singleSelections}
+                            />
 
-        </Card>
+                        </Col>
+                        <Col>
 
+                            <p className="mb-1 fw-bold">Culture:</p>
+                            <Typeahead
+                                id="select2"
+                                labelKey={"label"}
+                                multiple={false}
+                                onChange={onChangeSingleSelection}
+                                options={options}
+                                placeholder="Choose a state..."
+                                selected={singleSelections}
+                            />
+
+                        </Col>
+                        <Col>
+
+                            <p className="mb-1 fw-bold">
+                                Show Details</p>
+                            <Form.Check
+                                type="checkbox"
+                                id="autoSizingCheck"
+                                label="Show Group tests"
+                            />
+                            <Form.Check
+                                type="checkbox"
+                                id="autoSizingCheck"
+                                label="Show Expenses"
+                            />
+                            <Form.Check
+                                type="checkbox"
+                                id="autoSizingCheck"
+                                label="Show Profit"
+                            />
+
+                        </Col>
+                        <Col>
+                            <Button class="primary width-xs align-center"><i class="bi bi-gear-fill"></i><span>Save</span></Button>
+                        </Col>
+                    </Row>
+                </Card.Body>
+            </Card >
+        </>
     );
 };
 

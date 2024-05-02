@@ -92,6 +92,7 @@ const CreateExpenseCategory = React.lazy(() => import("../../src/components/Acco
 const Expenses = React.lazy(() => import("../../src/components/Accounting/Expenses/ExpensesTable"));
 const AccountingReportForms = React.lazy(() => import("../../src/components/Accounting/AccountingReport/AccountingReport"));
 const CreateExpense = React.lazy(() => import("../../src/components/Accounting/Expenses/CreateExpenses"));
+const DoctorExpense = React.lazy(() => import("../../src/components/Accounting/DoctorReport/DoctorReportForms"));
 
 export interface RoutesProps {
   path: RouteProps["path"];
@@ -318,6 +319,12 @@ const uiRoutes: RoutesProps = {
       path: "/components/accounting-report",
       name: "AccountingReport",
       element: <AccountingReportForms/>,
+      route: PrivateRoute,
+    },
+    {
+      path: "/components/accounting-doctor-report",
+      name: "DoctorReport",
+      element: <DoctorExpense/>,
       route: PrivateRoute,
     },
     {

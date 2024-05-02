@@ -2,6 +2,7 @@ import { Button, Card, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Table from "../../Table";
 import { records as data } from "./data";
+import PageTitle from "../../PageTitle";
 const columns = [
     {
         Header: "#",
@@ -58,36 +59,45 @@ const sizePerPageList = [
 const ExpensesTable = () => {
     return (
         <>
-            
-        <div class="d-flex justify-content-between p-2">
-            <div>
-                <h3><i class="bi bi-currency-dollar"></i><span>Expenses</span></h3>
-            </div>
-            <Link to="/components/accounting-create-expenses">
-            <Button class="primary ">
-                <i class="bi bi-plus-lg"></i>
-                <span>Create</span>
-            </Button></Link>
-        </div>
-        <Row>
-            <Col>
-                <Card>
-                    <Card.Body>
-                        <h4 className="header-title">Expenses Table</h4>
-                        <Table
-                            columns={columns}
-                            data={data}
-                            pageSize={5}
-                            sizePerPageList={sizePerPageList}
-                            isSortable={true}
-                            pagination={true}
-                            isSearchable={true}
-                        />
-                    </Card.Body>
-                </Card>
-            </Col>
-        </Row>
-    </>
+            <PageTitle
+                breadCrumbItems={[
+
+                    { label: "Expenses", path: "/components/accounting-expense", active: true },
+
+                ]}
+                title={"Expenses"}
+            />
+
+            <Row>
+                <Col>
+                    <Card>
+                        <Card.Body>
+
+
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h4 className="header-title">Expenses Table</h4>
+                                </div>
+                                <Link to="/components/accounting-create-expenses">
+                                    <Button class="primary ">
+                                        <i class="bi bi-plus-lg"></i>
+                                        <span>Create</span>
+                                    </Button></Link>
+                            </div>
+                            <Table
+                                columns={columns}
+                                data={data}
+                                pageSize={5}
+                                sizePerPageList={sizePerPageList}
+                                isSortable={true}
+                                pagination={true}
+                                isSearchable={true}
+                            />
+                        </Card.Body>
+                    </Card>
+                </Col>
+            </Row>
+        </>
     );
 };
 

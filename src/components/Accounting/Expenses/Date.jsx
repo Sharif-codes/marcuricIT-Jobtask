@@ -15,7 +15,7 @@ const DatePick = () => {
     };
     return (
         <div>
-             <div className="mb-3">
+             <div className="">
               <label className="form-label">Single Date</label> <br />
               <ShreyuDatepicker
                 hideAddon={true}

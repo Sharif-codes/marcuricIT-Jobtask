@@ -60,15 +60,12 @@ const CustomDatePicker = () => {
 
     return (
         <Card.Body>
-            <p className="mb-1 fw-bold">Date range:
-            </p>
             <Typeahead
                 id="select2"
                 labelKey={"label"}
                 multiple={false}
                 options={options}
                 placeholder="Choose a date range..."
-                defaultOpen={true} // Always display the options dropdown when clicked
                 selected={[{ label: selectedDateRange }]} // Display selected date range in the input field
                 onChange={(selected) => {
                     if (selected.length > 0) {

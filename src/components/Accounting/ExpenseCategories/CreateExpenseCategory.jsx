@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Card, Col, Form, Row } from 'react-bootstrap';
+import PageTitle from '../../PageTitle';
 
 
 const CreateExpenseCategory = () => {
@@ -8,7 +9,14 @@ const CreateExpenseCategory = () => {
 
             <Card>
                 <Card.Body>
-                    <h4 className="mb-3 header-title mt-0">Create Expense Category</h4>
+                <PageTitle
+                breadCrumbItems={[
+                    { label: "Expense Categories", path: "/components/accounting-expense-category"},
+                    { label: "Create Expense Category", path: "/components/accounting-create-expense-category",active: true },
+                   
+                ]}
+                title={"Expenses"}
+            />
 
                     <Form>
                         <Form.Group className="mb-3">

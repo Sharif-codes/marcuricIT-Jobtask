@@ -54,23 +54,32 @@ const sizePerPageList = [
 const ExpenseCategoryTable = () => {
     return (
         <>
-            
-            <div class="d-flex justify-content-between p-2">
-                <div>
-                    <h3><i class="bi bi-currency-dollar"></i><span>Expense Categories</span></h3>
-                </div>
-                <Link to="/components/accounting-create-expense-category">
-                <Button class="primary ">
 
-                    <i class="bi bi-plus-lg"></i>
-                    <span>Create</span>
-                </Button></Link>
-            </div>
+            <PageTitle
+                breadCrumbItems={[
+
+                    { label: "Expense Categories", path: "/components/accounting-expense-category",active: true },
+                   
+                ]}
+                title={"Expenses"}
+            />
             <Row>
                 <Col>
                     <Card>
                         <Card.Body>
-                            <h4 className="header-title">Expense Categories Table</h4>
+                           
+
+                            <div class="d-flex justify-content-between ">
+                                <div>
+                                <h4 className="header-title">Expense Categories Table</h4>
+                                </div>
+                                <Link to="/components/accounting-create-expense-category">
+                                    <Button class="primary ">
+
+                                        <i class="bi bi-plus-lg"></i>
+                                        <span>Create</span>
+                                    </Button></Link>
+                            </div>
                             <Table
                                 columns={columns}
                                 data={data}
