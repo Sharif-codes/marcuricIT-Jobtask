@@ -73,11 +73,11 @@ const ExpensesTable = () => {
                     <Card>
                         <Card.Body>
 
-                        <Row class="border">
+                        <Row>
                                 <Col xs={12} md={4}>
                                     <h4 className="header-title">Expenses</h4>
                                 </Col >
-                                <Col xs={12} md={8} class="align-center">
+                                <Col xs={12} md={6} class="align-center">
                                     <ButtonGroup className="mb-2">
                                         <Button variant="dark"><i class="bi bi-files"></i>Copy </Button>
                                         <Button variant="dark"><i class="bi bi-file-earmark-excel"></i>Excel</Button>
@@ -85,6 +85,14 @@ const ExpensesTable = () => {
                                         <Button variant="dark"><i class="bi bi-file-earmark-pdf"></i>PDF</Button>
                                       
                                     </ButtonGroup>
+                                </Col>
+                                <Col xs={12} md={2}>
+                                    <Link to="/components/accounting-create-expenses">
+                                        <Button class="primary ">
+
+                                            <i class="bi bi-plus-lg"></i>
+                                            <span>Create</span>
+                                        </Button></Link>
                                 </Col>
                                 
                             </Row>
