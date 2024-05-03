@@ -1,4 +1,4 @@
-import { Button, Card, Col, Row } from "react-bootstrap";
+import { Button, ButtonGroup, Card, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Table from "../../Table";
 import { records as data } from "./data";
@@ -73,17 +73,22 @@ const ExpensesTable = () => {
                     <Card>
                         <Card.Body>
 
-
-                            <div class="d-flex justify-content-between">
-                                <div>
-                                    <h4 className="header-title">Expenses Table</h4>
-                                </div>
-                                <Link to="/components/accounting-create-expenses">
-                                    <Button class="primary ">
-                                        <i class="bi bi-plus-lg"></i>
-                                        <span>Create</span>
-                                    </Button></Link>
-                            </div>
+                        <Row class="border">
+                                <Col xs={12} md={4}>
+                                    <h4 className="header-title">Expenses</h4>
+                                </Col >
+                                <Col xs={12} md={8} class="align-center">
+                                    <ButtonGroup className="mb-2">
+                                        <Button variant="dark"><i class="bi bi-files"></i>Copy </Button>
+                                        <Button variant="dark"><i class="bi bi-file-earmark-excel"></i>Excel</Button>
+                                        <Button variant="dark"><i class="bi bi-file-ruled"></i>CSV</Button>
+                                        <Button variant="dark"><i class="bi bi-file-earmark-pdf"></i>PDF</Button>
+                                      
+                                    </ButtonGroup>
+                                </Col>
+                                
+                            </Row>
+                            
                             <Table
                                 columns={columns}
                                 data={data}
